@@ -7,29 +7,22 @@ It looks up AAAA record first, then A record. Ruby's default resolver class (Res
 
 for example, assume that "ipv6.example.net" have these records on DNS,
 
-<tt>
-ipv6.example.net.           80000   IN      A       192.0.2.1
+ ipv6.example.net.           80000   IN      A       192.0.2.1
+ ipv6.example.net.           80000   IN      AAAA    2001:db8::1
 
-ipv6.example.net.           80000   IN      AAAA    2001:db8::1
-</tt>
+then 'Resolv' class (in the Ruby Standard Library) behaves:
 
-then Ruby's default Resolve behaves:
+ require 'resolv'
+ 
+ Resolv.getaddresses("ipv6.example.net") #=> ["192.0.2.1"]
+ Resolv.getaddress("ipv6.example.net")   #=> ["192.0.2.1", "2001:db8::1"]
 
-<tt>
-require 'resolv'
+If you want to lookup AAAA record prior to A record, install 'resolv-ipv6favor', then:
 
-Resolv.getaddresses("ipv6.example.net") #=> ["192.0.2.1"]
-Resolv.getaddress("ipv6.example.net")   #=> ["192.0.2.1", "2001:db8::1"]
-</tt>
+ require 'resolv-ipv6favor'
 
-If you want to lookup AAAA record prior to A record, then:
-
-<tt>
-require 'resolv-ipv6favor'
-
-IPv6FavorResolv.getaddresses("ipv6.example.net") #=> ["2001:db8::1"]
-IPv6FavorResolv.getaddress("ipv6.example.net")   #=> ["2001:db8::1", "192.0.2.1"]
-</tt>
+ IPv6FavorResolv.getaddresses("ipv6.example.net") #=> ["2001:db8::1"]
+ IPv6FavorResolv.getaddress("ipv6.example.net")   #=> ["2001:db8::1", "192.0.2.1"]
 
 == Note on Patches/Pull Requests
  
