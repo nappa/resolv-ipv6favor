@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "resolv-ipv6favor"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{simple resolver class that lookup AAAA records prior to A records}
+    gem.description = gem.summary
     gem.email = "ryosuke.yamazaki@mac.com"
     gem.homepage = "http://github.com/nappa/resolv-ipv6favor"
     gem.authors = ["Ryosuke Yamazaki"]
