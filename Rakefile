@@ -10,8 +10,7 @@ begin
     gem.email = "ryosuke.yamazaki@mac.com"
     gem.homepage = "http://github.com/nappa/resolv-ipv6favor"
     gem.authors = ["Ryosuke Yamazaki"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_development_dependency "shoulda", ">= 0"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

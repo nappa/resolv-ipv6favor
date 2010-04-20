@@ -1,6 +1,35 @@
 = resolv-ipv6favor
 
-Description goes here.
+Resolver class for Ruby.
+It looks up AAAA record first, then A record. Ruby's default resolver class (Resolv) looks up A record first, then AAAA record.
+
+== Usage
+
+for example, assume that "ipv6.example.net" have these records on DNS,
+
+<tt>
+ipv6.example.net.           80000   IN      A       192.0.2.1
+
+ipv6.example.net.           80000   IN      AAAA    2001:db8::1
+</tt>
+
+then Ruby's default Resolve behaves:
+
+<tt>
+require 'resolv'
+
+Resolv.getaddresses("ipv6.example.net") #=> ["192.0.2.1"]
+Resolv.getaddress("ipv6.example.net")   #=> ["192.0.2.1", "2001:db8::1"]
+</tt>
+
+If you want to lookup AAAA record prior to A record, then:
+
+<tt>
+require 'resolv-ipv6favor'
+
+IPv6FavorResolv.getaddresses("ipv6.example.net") #=> ["2001:db8::1"]
+IPv6FavorResolv.getaddress("ipv6.example.net")   #=> ["2001:db8::1", "192.0.2.1"]
+</tt>
 
 == Note on Patches/Pull Requests
  
